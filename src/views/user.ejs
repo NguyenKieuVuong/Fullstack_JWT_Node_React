@@ -12,11 +12,11 @@
     <title>Document</title>
   </head>
   <body>
-    <h1 class="text-center">Create new user:</h1>
     <form method="POST" action="/users/create-user">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-sm-6">
+        <div class="row justify-content-center mt-3">
+          <div class="col-sm-4">
+            <h3 class="text-center">Create new user:</h3>
             <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label"
                 >Email address</label
@@ -63,6 +63,36 @@
             <div class="mb-3 text-center">
               <button class="btn btn-primary" type="submit">Submit</button>
             </div>
+          </div>
+          <div class="col-sm-8">
+            <h3 class="text-center">List user:</h3>
+            <!-- <div><%= JSON.stringify(userList) %></div> -->
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                <% userList.forEach(function(item,index){ %>
+                <tr>
+                  <th scope="row"><%= index + 1 %></th>
+                  <td><%= item.username %></td>
+                  <td><%= item.email %></td>
+                  <td>
+                    <button type="submit" class="btn btn-info">Edit</button
+                    ><button type="submit" class="btn btn-danger">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
