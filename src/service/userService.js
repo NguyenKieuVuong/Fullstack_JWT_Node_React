@@ -15,23 +15,36 @@ const hashUserPassword = (password) => {
   return hashPassword;
   //console.log(">>> check pass: ", hashPassword);
 };
-const createNewUser = (email, username, password) => {
+const createNewUser = async (email, username, password) => {
   let hashPass = hashUserPassword(password);
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    database: "jwt",
+    Promise: bluebird,
+  });
+  try {
+    const [rows, fields] = await connection.execute(
+      "INSERT INTO users (email, username, password) VALUES (?, ?, ?)",
+      [email, username, hashPass]
+    );
+  } catch (err) {
+    console.log(">>>> check error: ", err);
+  }
+  
   // simple query
-  connection.query(
-    "INSERT INTO users (email, username, password) VALUES (?, ?, ?)",
-    [email, username, hashPass],
-    function (err, results, fields) {
-      //check error
-      if (err) {
-        console.log(err);
-      }
-      //console.log(results);
-      // results contains rows returned by server
-      //console.log(fields);
-      // fields contains extra meta data about results, if available
-    }
-  );
+
+  // connection.query(
+  //   "INSERT INTO users (email, username, password) VALUES (?, ?, ?)",
+  //   [email, username, hashPass],
+  //   function (err, results, fields) {
+  //     //check error
+  //     if (err) {
+  //       console.log(err);
+  //     }
+
+  //   }
+  // );
 };
 // const checkPassword =(password,hashPassword)=>{
 //     let checkPass = bcrypt.compareSync(password, hashPassword);
