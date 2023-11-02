@@ -15,7 +15,7 @@ const handleCreateNewUser = (req, res) => {
   let password = req.body.password;
   userService.createNewUser(email, username, password);
   //console.log(">>>> check data", req.body);
-  return res.send("handleCreateNewUser");
+  return res.redirect("/user");
 };
 module.exports = {
   handleHelloWord,
