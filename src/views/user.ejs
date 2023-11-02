@@ -70,24 +70,29 @@
             <table class="table table-bordered table-hover">
               <thead class="table-light">
                 <tr>
-                  <th scope="col">#</th>
+                  <th scope="col">ID</th>
                   <th scope="col">Email</th>
                   <th scope="col">Username</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                
                 <% userList.forEach(function(item,index){ %>
                 <tr>
-                  <th scope="row"><%= index + 1 %></th>
+                  <th scope="row"><%= item.id %></th>
                   <td><%= item.email %></td>
                   <td><%= item.username %></td>
                   <td>
-                    <button type="submit" class="btn btn-info">Edit</button
-                    ><button type="submit" class="btn btn-danger">
-                      Delete
-                    </button>
+                    <button class="btn btn-info">Edit</button>
+                    <form
+                      action="/del-user/<%= item.id %>"
+                      method="POST"
+                      style="display: inline"
+                    >
+                      <button type="submit" class="btn btn-danger">
+                        Delete
+                      </button>
+                    </form>
                   </td>
                 </tr>
                 <% }) %>
