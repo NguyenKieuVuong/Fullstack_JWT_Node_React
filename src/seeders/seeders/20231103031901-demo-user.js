@@ -13,7 +13,7 @@ module.exports = {
      */
     //Users - nhap ten table
     await queryInterface.bulkInsert(
-      "Users",
+      "User",
       [
         {
           email: "JohnDoe@gmail.com1",
