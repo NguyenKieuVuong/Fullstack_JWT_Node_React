@@ -26,10 +26,11 @@ const getUpdateUser = async (req, res) => {
   let user = await userService.getUserById(id);
   //check data luon co
   let userData = {};
-  if (user && user.length > 0) {
-    //vi user data la [] nen phai lay gia tri dau tien user[0]
-    userData = user[0];
-  }
+  userData = user;
+  // if (user && user.length > 0) {
+  //   //vi user data la [] nen phai lay gia tri dau tien user[0]
+  //   userData = user[0];
+  // }
   return res.render("updateUser.ejs", { userData });
 };
 const handleUpdateUser = async (req, res) => {
@@ -38,7 +39,7 @@ const handleUpdateUser = async (req, res) => {
   let email = req.body.email;
   let username = req.body.username;
   let user = await userService.updateUserInfo(id, email, username);
-  
+
   return res.redirect("/user");
 };
 
